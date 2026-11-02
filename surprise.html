@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>سورپرایز مخصوص تو 🎁</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #050816;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: #0066ff;
+            filter: blur(160px);
+            opacity: .2;
+            top: 5%;
+            left: 5%;
+            z-index: -1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 30px 15px;
+        }
+
+        nav a {
+            color: #a9c9ff;
+            text-decoration: none;
+            border: 1px solid #087bff;
+            padding: 11px 25px;
+            border-radius: 30px;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            background: #087bff;
+            color: white;
+            box-shadow: 0 0 20px #087bff;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 80px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 10px 22px;
+            border: 1px solid #00c8ff;
+            border-radius: 30px;
+            color: #00d9ff;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: clamp(35px, 7vw, 60px);
+            text-shadow: 0 0 20px #008cff;
+            margin-bottom: 25px;
+        }
+
+        .subtitle {
+            color: #a9c9ff;
+            font-size: 17px;
+            line-height: 2.5;
+        }
+
+        .surprise-card {
+            margin-top: 45px;
+            padding: 40px 30px;
+            background: linear-gradient(145deg, #101d39, #091329);
+            border: 1px solid #087bff;
+            border-radius: 25px;
+            box-shadow: 0 0 35px #0066ff30;
+        }
+
+        .gift {
+            font-size: 75px;
+            margin-bottom: 25px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 16px 35px;
+            border: none;
+            border-radius: 30px;
+            background: #087bff;
+            color: white;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 25px #087bff88;
+            transition: .3s;
+        }
+
+        button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 35px #00aaff;
+        }
+
+        .message {
+            display: none;
+            margin-top: 40px;
+            padding: 30px;
+            background: #07152c;
+            border: 1px solid #00aaff;
+            border-radius: 20px;
+            text-align: right;
+            animation: appear .7s ease;
+        }
+
+        .message p {
+            color: #c5d8fa;
+            font-size: 16px;
+            line-height: 2.8;
+            margin-bottom: 18px;
+        }
+
+        .message h2 {
+            color: #00d9ff;
+            text-align: center;
+            margin-top: 25px;
+            font-size: 22px;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 35px;
+            color: #a9c9ff;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: #00d9ff;
+        }
+
+        footer {
+            text-align: center;
+            color: #6685b8;
+            padding: 35px;
+        }
+
+        @media(max-width: 600px) {
+            .surprise-card {
+                padding: 30px 18px;
+            }
+
+            .message {
+                padding: 22px 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">🏠 خانه</a>
+        <a href="timer.html">⏳ تایمر سن</a>
+        <a href="surprise.html">🎁 سورپرایز</a>
+    </nav>
+
+    <main class="container">
+
+        <div class="tag">A SPECIAL MESSAGE FOR YOU</div>
+
+        <h1>یه سورپرایز برای تو 🎁</h1>
+
+        <p class="subtitle">
+            این صفحه یه پیام کوچیک برای یک روز خاص داره.
+            <br>
+            برای دیدنش روی دکمه زیر کلیک کن.
+        </p>
+
+        <section class="surprise-card">
+
+            <div class="gift">🎁</div>
+
+            <h2>یک یادگاری از طرف من</h2>
+
+            <p class="subtitle">
+                بعضی حرف‌ها شاید ساده باشن،
+                اما گفتنشون در یک روز خاص ارزش خودش رو داره.
+            </p>
+
+            <button onclick="revealMessage()">
+                باز کردن پیام 💙
+            </button>
+
+            <div class="message" id="message">
+
+                <p>
+                    داداش، هر آدمی در زندگی مسیر مخصوص به خودش رو داره.
+                    مسیری که با انتخاب‌ها، تجربه‌ها، تلاش‌ها و اتفاق‌های
+                    مختلف شکل می‌گیره.
+                </p>
+
+                <p>
+                    تو هم تا امروز بخش‌های مختلفی از این مسیر رو پشت
+                    سر گذاشتی و قطعاً روزهای زیادی در انتظارت هستن
+                    که می‌تونن پر از تجربه‌های تازه و فرصت‌های خوب باشن.
+                </p>
+
+                <p>
+                    امیدوارم همیشه برای رسیدن به هدف‌هات انگیزه داشته
+                    باشی و هیچ‌وقت ارزش تلاش‌هایی رو که برای آینده‌ات
+                    انجام می‌دی فراموش نکنی.
+                </p>
+
+                <p>
+                    امیدوارم در زندگی آدم‌هایی کنارت باشن که بهت انرژی
+                    مثبت بدن، از موفقیت‌هات خوشحال بشن و در روزهای سخت
+                    همراه قابل اعتمادی برات باشن.
+                </p>
+
+                <p>
+                    از طرف من برات سلامتی، آرامش، موفقیت و اتفاق‌های
+                    خوب آرزو می‌کنم. امیدوارم سال جدید زندگیت شروع
+                    اتفاق‌هایی باشه که مدت‌ها منتظرشون بودی.
+                </p>
+
+                <h2>
+                    تولدت مبارک قهرمان! 💙🎉
+                </h2>
+
+            </div>
+
+        </section>
+
+        <a href="index.html" class="back">← بازگشت به صفحه اصلی</a>
+
+    </main>
+
+    <footer>
+        A little surprise, made just for you 💙
+    </footer>
+
+    <script>
+        function revealMessage() {
+
+            const message = document.getElementById("message");
+
+            message.style.display = "block";
+
+            const button = document.querySelector("button");
+
+            button.textContent = "پیام باز شد 💙";
+            button.disabled = true;
+
+            message.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+    </script>
+
+</body>
+</html>

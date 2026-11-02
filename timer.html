@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تایمر زندگی داداش ⏳</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: #050816;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: #0066ff;
+            filter: blur(160px);
+            opacity: .2;
+            top: 5%;
+            left: 5%;
+            z-index: -1;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 30px 15px;
+        }
+
+        nav a {
+            color: #a9c9ff;
+            text-decoration: none;
+            border: 1px solid #087bff;
+            padding: 11px 25px;
+            border-radius: 30px;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            background: #087bff;
+            color: white;
+            box-shadow: 0 0 20px #087bff;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 75px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 10px 22px;
+            border: 1px solid #00c8ff;
+            border-radius: 30px;
+            color: #00d9ff;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(35px, 7vw, 62px);
+            text-shadow: 0 0 20px #008cff;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            max-width: 750px;
+            margin: 0 auto;
+            color: #a9c9ff;
+            font-size: 17px;
+            line-height: 2.5;
+        }
+
+        .timer-card {
+            margin: 50px auto;
+            padding: 35px 25px;
+            background: linear-gradient(145deg, #101d39, #091329);
+            border: 1px solid #087bff;
+            border-radius: 28px;
+            box-shadow: 0 0 35px #0066ff30;
+        }
+
+        .timer {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 15px;
+            direction: rtl;
+            overflow-x: auto;
+            padding: 15px 5px 25px;
+        }
+
+        .box {
+            flex: 1;
+            min-width: 120px;
+            padding: 30px 12px;
+            background: linear-gradient(145deg, #10274c, #071329);
+            border: 1px solid #087bff;
+            border-radius: 22px;
+            box-shadow: 0 0 20px #087bff33;
+            transition: .3s;
+        }
+
+        .box:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 0 30px #087bff88;
+        }
+
+        .box strong {
+            display: block;
+            color: #00d9ff;
+            font-size: clamp(25px, 4vw, 38px);
+            font-weight: 900;
+            text-shadow: 0 0 15px #00aaff;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .box span {
+            display: block;
+            color: #a9c9ff;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .extra-message {
+            max-width: 800px;
+            margin: 45px auto;
+            padding: 30px;
+            background: #0b1730;
+            border-right: 3px solid #00c8ff;
+            border-radius: 15px;
+            text-align: right;
+        }
+
+        .extra-message h2 {
+            color: #00d9ff;
+            margin-bottom: 18px;
+        }
+
+        .extra-message p {
+            color: #b9ceef;
+            line-height: 2.7;
+            font-size: 16px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 30px;
+            color: white;
+            background: #087bff;
+            border-radius: 30px;
+            text-decoration: none;
+            box-shadow: 0 0 20px #087bff77;
+            transition: .3s;
+        }
+
+        .back-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 30px #00aaff;
+        }
+
+        footer {
+            text-align: center;
+            color: #6685b8;
+            padding: 35px;
+        }
+
+        @media(max-width: 650px) {
+            .timer {
+                justify-content: flex-start;
+            }
+
+            .box {
+                flex: 0 0 125px;
+            }
+
+            .timer-card {
+                padding: 25px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">🏠 خانه</a>
+        <a href="timer.html">⏳ تایمر سن</a>
+        <a href="surprise.html">🎁 سورپرایز</a>
+    </nav>
+
+    <main class="container">
+
+        <div class="tag">LIFE TIME COUNTER</div>
+
+        <h1>⏳ داستان زمان داداش</h1>
+
+        <p class="description">
+            از روزی که به دنیا اومدی تا همین لحظه، زمان زیادی گذشته.
+            <br>
+            سال‌ها، روزها، ساعت‌ها و ثانیه‌هایی که هر کدوم بخشی
+            از داستان زندگی تو رو تشکیل می‌دن.
+            <br>
+            اینجا فقط گذر زمان رو نمی‌بینی؛ می‌تونی به مسیر
+            و تجربه‌هایی فکر کنی که تا امروز پشت سر گذاشتی.
+        </p>
+
+        <section class="timer-card">
+
+            <h2 style="color:#00d9ff; margin-bottom:15px;">
+                زمان سپری‌شده از تولدت
+            </h2>
+
+            <div class="timer">
+
+                <div class="box">
+                    <strong id="years">0</strong>
+                    <span>سال</span>
+                </div>
+
+                <div class="box">
+                    <strong id="days">0</strong>
+                    <span>روز</span>
+                </div>
+
+                <div class="box">
+                    <strong id="hours">0</strong>
+                    <span>ساعت</span>
+                </div>
+
+                <div class="box">
+                    <strong id="minutes">0</strong>
+                    <span>دقیقه</span>
+                </div>
+
+                <div class="box">
+                    <strong id="seconds">0</strong>
+                    <span>ثانیه</span>
+                </div>
+
+            </div>
+
+            <p style="color:#6685b8; font-size:13px;">
+                این شمارنده به صورت زنده به‌روزرسانی می‌شود.
+            </p>
+
+        </section>
+
+        <section class="extra-message">
+
+            <h2>هر لحظه، بخشی از یک مسیر 💙</h2>
+
+            <p>
+                زندگی از مجموعه‌ای از لحظه‌های کوچک و بزرگ ساخته شده.
+                بعضی روزها پر از اتفاق‌های خوب هستن و بعضی روزها
+                چیزهای تازه‌ای برای یاد گرفتن به همراه دارن.
+            </p>
+
+            <p>
+                هر سالی که می‌گذره، تجربه‌های جدیدی به زندگی اضافه
+                می‌شه و آدم فرصت پیدا می‌کنه بیشتر خودش رو بشناسه،
+                هدف‌های تازه‌ای داشته باشه و برای آینده برنامه‌ریزی کنه.
+            </p>
+
+            <p>
+                امیدوارم سال‌های پیش رو برات پر از پیشرفت،
+                انتخاب‌های خوب، فرصت‌های ارزشمند و خاطراتی باشن
+                که همیشه با حس خوبی به یادشون بیاری.
+            </p>
+
+        </section>
+
+        <a href="index.html" class="back-button">بازگشت به صفحه اصلی 🏠</a>
+
+    </main>
+
+    <footer>
+        Every second matters 💙
+    </footer>
+
+    <script>
+        const birthday = new Date(2007, 10, 3, 0, 0, 0);
+
+        function updateTimer() {
+
+            const now = new Date();
+
+            let years = now.getFullYear() - birthday.getFullYear();
+
+            let anniversary = new Date(
+                now.getFullYear(),
+                birthday.getMonth(),
+                birthday.getDate()
+            );
+
+            if (now < anniversary) {
+                years--;
+            }
+
+            anniversary = new Date(
+                birthday.getFullYear() + years,
+                birthday.getMonth(),
+                birthday.getDate()
+            );
+
+            let difference = now - anniversary;
+
+            const days = Math.floor(difference / 86400000);
+            difference %= 86400000;
+
+            const hours = Math.floor(difference / 3600000);
+            difference %= 3600000;
+
+            const minutes = Math.floor(difference / 60000);
+            difference %= 60000;
+
+            const seconds = Math.floor(difference / 1000);
+
+            document.getElementById("years").textContent = years;
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    </script>
+
+</body>
+</html>

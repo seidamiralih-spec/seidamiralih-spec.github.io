@@ -1,0 +1,718 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>گالری خاطرات ما 💙</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue: #078cff;
+            --cyan: #42d9ff;
+            --light: #d9f2ff;
+            --muted: #91b9d9;
+            --bg: #030a18;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            min-height: 100vh;
+            color: white;
+            background:
+                radial-gradient(ellipse at 50% 0%, #103b78 0%, transparent 48%),
+                radial-gradient(circle at 5% 70%, #071b3b 0%, transparent 35%),
+                var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* نورهای پس زمینه */
+
+        .glow {
+            position: fixed;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: #0077ff;
+            filter: blur(140px);
+            opacity: 0.13;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .glow.one {
+            top: 20%;
+            right: -150px;
+        }
+
+        .glow.two {
+            bottom: 5%;
+            left: -150px;
+        }
+
+        /* نوار منو */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 17px 12px;
+            background: rgba(2, 10, 27, 0.82);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(66, 217, 255, 0.2);
+        }
+
+        nav a {
+            color: #c8eaff;
+            text-decoration: none;
+            font-size: 13px;
+            padding: 10px 17px;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(0, 140, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 140, 255, 0.4);
+            color: white;
+        }
+
+        nav a.active {
+            background: linear-gradient(120deg, #087cff, #00bfff);
+            color: white;
+            box-shadow: 0 0 18px rgba(0, 140, 255, 0.5);
+        }
+
+        /* هدر */
+
+        .hero {
+            text-align: center;
+            padding: 75px 20px 45px;
+            animation: appear 1s ease;
+        }
+
+        .hero-icon {
+            font-size: 65px;
+            display: inline-block;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 18px #00aaff);
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(29px, 5vw, 48px);
+            font-weight: 900;
+            text-shadow: 0 0 15px #008cff, 0 0 35px #0055ff;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            color: #a9d9ff;
+            line-height: 2.2;
+            font-size: 15px;
+        }
+
+        .line {
+            width: 100px;
+            height: 3px;
+            margin: 25px auto 0;
+            border-radius: 10px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+            box-shadow: 0 0 15px var(--blue);
+        }
+
+        /* شمارنده عکس */
+
+        .photo-count {
+            width: fit-content;
+            margin: 0 auto 35px;
+            padding: 10px 22px;
+            border: 1px solid rgba(66, 217, 255, 0.35);
+            border-radius: 30px;
+            color: #c7eaff;
+            background: rgba(0, 120, 255, 0.09);
+            font-size: 13px;
+        }
+
+        .photo-count span {
+            color: var(--cyan);
+            font-weight: 800;
+        }
+
+        /* گالری */
+
+        .gallery-container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+            padding-bottom: 50px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .photo-card {
+            position: relative;
+            padding: 11px;
+            border-radius: 22px;
+            background: linear-gradient(
+                145deg,
+                rgba(0, 153, 255, 0.18),
+                rgba(0, 40, 100, 0.18)
+            );
+            border: 1px solid rgba(54, 177, 255, 0.5);
+            box-shadow:
+                0 0 18px rgba(0, 140, 255, 0.12),
+                inset 0 0 15px rgba(0, 140, 255, 0.06);
+            overflow: hidden;
+            cursor: pointer;
+            animation: appear 0.8s ease both;
+            transition: 0.35s;
+        }
+
+        .photo-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .photo-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .photo-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--cyan);
+            box-shadow:
+                0 0 30px rgba(0, 160, 255, 0.35),
+                inset 0 0 20px rgba(0, 140, 255, 0.1);
+        }
+
+        .photo-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #071a35;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 310px;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 20, 55, 0.35);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .photo-card:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .zoom-icon {
+            width: 55px;
+            height: 55px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(0, 140, 255, 0.8);
+            box-shadow: 0 0 25px #008cff;
+            font-size: 24px;
+        }
+
+        .photo-info {
+            padding: 17px 10px 10px;
+            text-align: center;
+        }
+
+        .photo-info h3 {
+            font-size: 16px;
+            color: #d7f1ff;
+            margin-bottom: 7px;
+        }
+
+        .photo-info p {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* متن پایانی */
+
+        .ending {
+            max-width: 650px;
+            width: 90%;
+            margin: 10px auto 70px;
+            padding: 25px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(66, 217, 255, 0.25);
+            border-bottom: 1px solid rgba(66, 217, 255, 0.25);
+            color: #b5dfff;
+            line-height: 2.3;
+        }
+
+        .ending span {
+            color: var(--cyan);
+        }
+
+        /* نمایش بزرگ عکس */
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            background: rgba(0, 4, 15, 0.95);
+            backdrop-filter: blur(15px);
+        }
+
+        .lightbox.show {
+            display: flex;
+            animation: appear 0.25s ease;
+        }
+
+        .lightbox-content {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 15px;
+            border: 1px solid rgba(66, 217, 255, 0.6);
+            box-shadow: 0 0 35px rgba(0, 140, 255, 0.35);
+        }
+
+        .lightbox-caption {
+            margin-top: 17px;
+            color: #cceaff;
+            font-size: 15px;
+        }
+
+        .close,
+        .arrow {
+            position: absolute;
+            display: grid;
+            place-items: center;
+            color: white;
+            background: rgba(0, 120, 255, 0.25);
+            border: 1px solid rgba(66, 217, 255, 0.45);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .arrow:hover {
+            background: #087cff;
+            box-shadow: 0 0 20px #087cff;
+        }
+
+        .close {
+            top: 25px;
+            left: 25px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 25px;
+        }
+
+        .arrow {
+            top: 50%;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 23px;
+            transform: translateY(-50%);
+        }
+
+        .arrow.right {
+            right: 20px;
+        }
+
+        .arrow.left {
+            left: 20px;
+        }
+
+        /* فوتر */
+
+        footer {
+            padding: 25px;
+            text-align: center;
+            color: #719bc0;
+            font-size: 12px;
+            border-top: 1px solid rgba(66, 217, 255, 0.12);
+        }
+
+        /* انیمیشن ها */
+
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* موبایل */
+
+        @media (max-width: 650px) {
+            nav {
+                gap: 5px;
+            }
+
+            nav a {
+                padding: 8px 10px;
+                font-size: 11px;
+            }
+
+            .hero {
+                padding-top: 50px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .photo-wrapper img {
+                height: 270px;
+            }
+
+            .arrow {
+                width: 38px;
+                height: 38px;
+                font-size: 18px;
+            }
+
+            .arrow.right {
+                right: 8px;
+            }
+
+            .arrow.left {
+                left: 8px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+    <!-- منوی سایت -->
+
+    <nav>
+        <a href="index.html">خانه</a>
+        <a href="timer.html">محاسبه سن</a>
+        <a href="surprise.html">سورپرایز</a>
+        <a href="gallery.html" class="active">گالری خاطرات</a>
+        <a href="countdown.html">تولد بعدی</a>
+    </nav>
+
+    <!-- عنوان -->
+
+    <header class="hero">
+
+        <div class="hero-icon">📸</div>
+
+        <h1>گالری خاطرات ما</h1>
+
+        <p>
+            بعضی لحظه‌ها ارزش این رو دارن که برای همیشه نگهشون داریم.
+            <br>
+            اینجا چندتا از خاطرات قشنگمون رو کنار هم جمع کردیم.
+        </p>
+
+        <div class="line"></div>
+
+    </header>
+
+    <!-- تعداد عکس ها -->
+
+    <div class="photo-count">
+        💙 تعداد خاطرات ثبت‌شده:
+        <span>۴ عکس</span>
+    </div>
+
+    <!-- گالری عکس ها -->
+
+    <main class="gallery-container">
+
+        <section class="gallery">
+
+            <article class="photo-card"
+                onclick="openPhoto(0)">
+
+                <div class="photo-wrapper">
+                    <img src="images/photo1.jpg" alt="خاطره اول">
+                    <div class="photo-overlay">
+                        <div class="zoom-icon">⌕</div>
+                    </div>
+                </div>
+
+                <div class="photo-info">
+                    <h3>خاطره اول 💙</h3>
+                    <p>یک لحظه‌ی به‌یادموندنی</p>
+                </div>
+
+            </article>
+
+            <article class="photo-card"
+                onclick="openPhoto(1)">
+
+                <div class="photo-wrapper">
+                    <img src="images/photo2.jpg" alt="خاطره دوم">
+                    <div class="photo-overlay">
+                        <div class="zoom-icon">⌕</div>
+                    </div>
+                </div>
+
+                <div class="photo-info">
+                    <h3>خاطره دوم ✨</h3>
+                    <p>از روزهای خوبمون</p>
+                </div>
+
+            </article>
+
+            <article class="photo-card"
+                onclick="openPhoto(2)">
+
+                <div class="photo-wrapper">
+                    <img src="images/photo3.jpg" alt="خاطره سوم">
+                    <div class="photo-overlay">
+                        <div class="zoom-icon">⌕</div>
+                    </div>
+                </div>
+
+                <div class="photo-info">
+                    <h3>خاطره سوم 📷</h3>
+                    <p>یک قاب از خاطراتمون</p>
+                </div>
+
+            </article>
+
+            <article class="photo-card"
+                onclick="openPhoto(3)">
+
+                <div class="photo-wrapper">
+                    <img src="images/photo4.jpg" alt="خاطره چهارم">
+                    <div class="photo-overlay">
+                        <div class="zoom-icon">⌕</div>
+                    </div>
+                </div>
+
+                <div class="photo-info">
+                    <h3>خاطره چهارم 🌟</h3>
+                    <p>برای همیشه در یادمون</p>
+                </div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+    <!-- متن پایانی -->
+
+    <section class="ending">
+        هر عکس یه داستان داره و هر خاطره یه ارزش خاص.
+        <br>
+        امیدوارم روزهای قشنگ بیشتری در پیش داشته باشیم.
+        <br>
+        <span>تولدت مبارک داداش 💙🎂</span>
+    </section>
+
+    <!-- نمایش تمام صفحه عکس -->
+
+    <div class="lightbox" id="lightbox">
+
+        <button class="close" onclick="closePhoto()" aria-label="بستن">
+            ×
+        </button>
+
+        <button class="arrow right" onclick="changePhoto(1)" aria-label="عکس بعدی">
+            ❯
+        </button>
+
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="" alt="نمایش عکس">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+
+        <button class="arrow left" onclick="changePhoto(-1)" aria-label="عکس قبلی">
+            ❮
+        </button>
+
+    </div>
+
+    <footer>
+        ساخته شده با 💙 برای داداش
+    </footer>
+
+    <script>
+
+        // اطلاعات عکس ها
+
+        const photos = [
+            {
+                src: "images/photo1.jpg",
+                caption: "خاطره اول 💙"
+            },
+            {
+                src: "images/photo2.jpg",
+                caption: "خاطره دوم ✨"
+            },
+            {
+                src: "images/photo3.jpg",
+                caption: "خاطره سوم 📷"
+            },
+            {
+                src: "images/photo4.jpg",
+                caption: "خاطره چهارم 🌟"
+            }
+        ];
+
+        let currentPhoto = 0;
+
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImage = document.getElementById("lightbox-image");
+        const lightboxCaption = document.getElementById("lightbox-caption");
+
+        // باز کردن عکس
+
+        function openPhoto(index) {
+
+            currentPhoto = index;
+
+            showPhoto();
+
+            lightbox.classList.add("show");
+
+            document.body.style.overflow = "hidden";
+        }
+
+        // نمایش عکس انتخاب شده
+
+        function showPhoto() {
+
+            lightboxImage.src = photos[currentPhoto].src;
+
+            lightboxCaption.textContent =
+                photos[currentPhoto].caption;
+
+        }
+
+        // عکس قبلی و بعدی
+
+        function changePhoto(direction) {
+
+            currentPhoto += direction;
+
+            if (currentPhoto >= photos.length) {
+                currentPhoto = 0;
+            }
+
+            if (currentPhoto < 0) {
+                currentPhoto = photos.length - 1;
+            }
+
+            showPhoto();
+        }
+
+        // بستن عکس
+
+        function closePhoto() {
+
+            lightbox.classList.remove("show");
+
+            document.body.style.overflow = "";
+
+        }
+
+        // بستن با کلیک روی فضای خالی
+
+        lightbox.addEventListener("click", function(event) {
+
+            if (event.target === lightbox) {
+                closePhoto();
+            }
+
+        });
+
+        // کنترل با کیبورد
+
+        document.addEventListener("keydown", function(event) {
+
+            if (!lightbox.classList.contains("show")) {
+                return;
+            }
+
+            if (event.key === "Escape") {
+                closePhoto();
+            }
+
+            if (event.key === "ArrowRight") {
+                changePhoto(-1);
+            }
+
+            if (event.key === "ArrowLeft") {
+                changePhoto(1);
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
